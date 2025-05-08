@@ -311,4 +311,59 @@ plt.savefig("scatterplot.png")
 #show the plt
 plt.show()
 
+# https://realpython.com/linear-regression-in-python/#simple-linear-regression-with-scikit-learn 
+# one point above states linearregression() requires x to be a 2D array. 
+# i initially got errors because this wasn't the case. the reshape(-1,1) below basically changes the x values from being a 1D array with 150 instances to a 2D array with 150 rows and 1 column.
+# to use numpy reshape on a pandas df you have to use values as well which i learned from: https://stackoverflow.com/questions/14390224/how-to-reshape-a-pandas-series#:~:text=you%20can%20directly%20use%20a,convert%20DataFrame%20to%20numpy%20ndarray 
+
+# set out the data I'll input to the regression function
+x = iris_df["petal length"].values.reshape((-1, 1))
+y = iris_df["petal width"]
+
+# create a model that fits x points and y points using linear regression    
+# after errors i realise i had to reshape 
+model = LinearRegression().fit(x, y)
+
+# get the r squared score from the model
+r_sq = model.score(x, y)
+# print the result
+print(f"coefficient of determination: {r_sq}")
+
+# save the r squared score to the file
+with open('iris_project.txt', 'at') as f:
+    print(f"coefficient of determination: {r_sq}", file=f)
+
+# round my r square value for the next task
+r_sq = round(r_sq,2)
+
+x = iris_df['petal length']
+y = iris_df['petal width']
+
+# Perform linear fit
+coefficients = np.polyfit(x, y, 1)
+print("Linear Fit Coefficients:", coefficients)
+
+# Create polynomial function
+p = np.poly1d(coefficients)
+
+#plot this on a scatter plot, add labels of the data points, then plot the linear fit line.
+plt.scatter(x, y, label='Data Points')
+plt.plot(x, p(x), label='Linear Fit', color='red')
+# instead of messing with the axis im trying to annotate inside the plot
+# im adapting code from here but using python plain text formatting because of exposure to that style via Andrew: https://matplotlib.org/stable/users/explain/text/annotations.html#basic-annotation 
+# the xy argument dictates placement
+plt.annotate(f'R^2 = {r_sq:.3f}', xy=(5, 0.5),fontsize=11, color='black')
+# create some labels for the axes
+plt.xlabel('petal length (cm)')
+plt.ylabel('petal width (cm)')
+plt.title('Linear Fit of Petal Width vs. Petal Length')
+
+# save the scatterplot as a png file
+plt.savefig("linearfit.png")
+
+# make the legend for the plot
+plt.legend()
+# show the plot
+plt.show()
+
 
