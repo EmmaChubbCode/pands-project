@@ -235,30 +235,35 @@ plt.savefig("boxplot.png")
 
 # how to set the title: https://how.dev/answers/how-to-add-a-title-to-a-seaborn-plot 
 # im putting the different species across the x axis and using the sepal length column to plot my y. this is should give me the sepal length for all of the classes if my dataset is working how i want it to.
+plt.figure(figsize=(10, 6))
 sns.boxplot(x="class", y="sepal length", data=iris_df).set_title("Compare the Distributions of Sepal Length")
 
 # save the boxplot as a png file
 plt.savefig("boxplot_sepallength.png")
 
 # repeat for other features
+plt.figure(figsize=(10, 6))
 sns.boxplot(x="class", y="sepal width", data=iris_df).set_title("Compare the Distributions of Sepal Width")
 
 # save the boxplot as a png file
 plt.savefig("boxplot_sepalwidth.png")
 
 ## repeat for other features
+plt.figure(figsize=(10, 6))
 sns.boxplot(x="class", y="petal width", data=iris_df).set_title("Compare the Distributions of Petal Width")
 
 # save the boxplot as a png file
 plt.savefig("boxplot_petalwidth.png")
 
 # repeat for other features
+plt.figure(figsize=(10, 6))
 sns.boxplot(x="class", y="petal length", data=iris_df).set_title("Compare the Distributions of Petal Length")
 
 # save the boxplot as a png file
 plt.savefig("boxplot_petallength.png")
 
 # set the styling of the figure. see: https://seaborn.pydata.org/generated/seaborn.set_style.html#seaborn-set-style 
+plt.figure(figsize=(10, 6))
 sns.set_style('darkgrid')
 
 # see: https://seaborn.pydata.org/generated/seaborn.pairplot.html 
